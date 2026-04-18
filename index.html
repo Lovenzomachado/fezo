@@ -396,7 +396,6 @@
     background-position: center;
   }
   .project-card:hover .card-img-inner { transform: scale(1.05); }
-  /* Gradientes de fallback - serão substituídos pelas imagens via JS */
   .card-img-inner.id1 { background: linear-gradient(135deg, oklch(0.20 0.05 280), oklch(0.35 0.12 290)); }
   .card-img-inner.id2 { background: linear-gradient(135deg, oklch(0.18 0.06 265), oklch(0.32 0.14 275)); }
   .card-img-inner.id3 { background: linear-gradient(135deg, oklch(0.22 0.07 260), oklch(0.38 0.10 285)); }
@@ -981,7 +980,7 @@
     .footer-copy { margin-top: 32px; font-size: 9px; letter-spacing: 0.15em; }
   }
 
-  /* POPUP - responsivo com largura quase 100% no desktop */
+  /* POPUP - imagens empilhadas verticalmente (uma coluna) */
   .popup-overlay {
     position: fixed; inset: 0; z-index: 5000;
     background: rgba(15,14,12,0.92);
@@ -1076,21 +1075,15 @@
   .popup-images {
     overflow-y: auto;
     flex: 1;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
     padding: 16px;
   }
   @media (min-width: 768px) {
     .popup-images {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
+      gap: 24px;
       padding: 24px;
-    }
-  }
-  @media (min-width: 1200px) {
-    .popup-images {
-      grid-template-columns: repeat(3, 1fr);
     }
   }
   .popup-images img {
@@ -1134,7 +1127,7 @@
   
   <div class="swiper projects-swiper">
     <div class="swiper-wrapper">
-      <div class="swiper-slide"><div class="project-card" data-project="docile"><div class="card-img"><div class="card-img-inner id1" style="background-image: url('PROJETO-DOCILE-apresentaçao_01.webp'); background-size: cover; background-position: center;"><div class="card-img-glyph">Dc.</div></div><div class="card-img-tag">Branding</div><div class="card-hover-overlay"><p class="card-hover-desc">Sistema de identidade visual para a marca Docile — delicada, intencional e cheia de personalidade.</p></div></div><div class="card-divider"></div><div class="card-body"><div class="card-cat">Brand Identity</div><div class="card-title">Docile</div><div class="card-year">2024</div></div></div></div>
+      <div class="swiper-slide"><div class="project-card" data-project="docile"><div class="card-img"><div class="card-img-inner id1" style="background-image: url('PROJETO-DOCILE-apresentacao_01.webp'); background-size: cover; background-position: center;"><div class="card-img-glyph">Dc.</div></div><div class="card-img-tag">Branding</div><div class="card-hover-overlay"><p class="card-hover-desc">Sistema de identidade visual para a marca Docile — delicada, intencional e cheia de personalidade.</p></div></div><div class="card-divider"></div><div class="card-body"><div class="card-cat">Brand Identity</div><div class="card-title">Docile</div><div class="card-year">2024</div></div></div></div>
       <div class="swiper-slide"><div class="project-card" data-project="estampa"><div class="card-img"><div class="card-img-inner id2" style="background-image: url('projeto-estampa-bahia_01.webp'); background-size: cover; background-position: center;"><div class="card-img-glyph">Ba.</div></div><div class="card-img-tag">Estampa</div><div class="card-hover-overlay"><p class="card-hover-desc">Projeto de estampa com referências culturais baianas — cores, formas e territórios.</p></div></div><div class="card-divider"></div><div class="card-body"><div class="card-cat">Estampa</div><div class="card-title">Estampa Bahia</div><div class="card-year">2024</div></div></div></div>
       <div class="swiper-slide"><div class="project-card" data-project="gi"><div class="card-img"><div class="card-img-inner id3" style="background-image: url('id-visual-gi_01.webp'); background-size: cover; background-position: center;"><div class="card-img-glyph">Gi.</div></div><div class="card-img-tag">Identidade</div><div class="card-hover-overlay"><p class="card-hover-desc">Identidade visual para Gi — uma marca pessoal com essência forte e presença marcante.</p></div></div><div class="card-divider"></div><div class="card-body"><div class="card-cat">ID Visual</div><div class="card-title">ID Visual Gi</div><div class="card-year">2024</div></div></div></div>
       <div class="swiper-slide"><div class="project-card" data-project="melancolia"><div class="card-img"><div class="card-img-inner id4" style="background-image: url('melancolia-e-nina-haze-portfolio_01.webp'); background-size: cover; background-position: center;"><div class="card-img-glyph">Mn.</div></div><div class="card-img-tag">Música</div><div class="card-hover-overlay"><p class="card-hover-desc">Direção de arte para Melancolia e Nina Haze — visual que respira a atmosfera das faixas.</p></div></div><div class="card-divider"></div><div class="card-body"><div class="card-cat">Art Direction</div><div class="card-title">Melancolia & Nina Haze</div><div class="card-year">2024</div></div></div></div>
@@ -1330,9 +1323,9 @@ window.addEventListener('load', () => {
 });
 window.addEventListener('resize', () => { initSwiper(); });
 
-// Projects data e popup (todas as imagens em .webp)
+// Projects data e popup (todas as imagens em .webp, com nome corrigido para Docile)
 const projects = { 
-  docile: { cat:'Brand Identity', title:'Docile', desc:'Sistema de identidade visual para a marca Docile — delicada, intencional e cheia de personalidade.', images:Array.from({length:11},(_,i)=>`PROJETO-DOCILE-apresentaçao_${String(i+1).padStart(2,'0')}.webp`) }, 
+  docile: { cat:'Brand Identity', title:'Docile', desc:'Sistema de identidade visual para a marca Docile — delicada, intencional e cheia de personalidade.', images:Array.from({length:11},(_,i)=>`PROJETO-DOCILE-apresentacao_${String(i+1).padStart(2,'0')}.webp`) }, 
   estampa: { cat:'Estampa', title:'Estampa Bahia', desc:'Projeto de estampa com referências culturais baianas — cores, formas e territórios.', images:Array.from({length:6},(_,i)=>`projeto-estampa-bahia_${String(i+1).padStart(2,'0')}.webp`) }, 
   gi: { cat:'ID Visual', title:'ID Visual Gi', desc:'Identidade visual para Gi — uma marca pessoal com essência forte e presença marcante.', images:Array.from({length:9},(_,i)=>`id-visual-gi_${String(i+1).padStart(2,'0')}.webp`) }, 
   melancolia: { cat:'Art Direction', title:'Melancolia & Nina Haze', desc:'Direção de arte para Melancolia e Nina Haze — visual que respira a atmosfera das faixas.', images:Array.from({length:6},(_,i)=>`melancolia-e-nina-haze-portfolio_${String(i+1).padStart(2,'0')}.webp`) }, 
